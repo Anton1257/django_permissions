@@ -5,7 +5,11 @@ from rest_framework.response import Response
 from .models import Advertisement
 from .serializers import AdvertisementSerializer
 from .filters import AdvertisementFilter
-from .permissions import UnauthenticatedUserThrottle, AuthenticatedUserThrottle
+from .permissions import (
+    UnauthenticatedUserThrottle,
+    AuthenticatedUserThrottle,
+    IsAdvertisementAuthor,
+)
 
 
 class AdvertisementViewSet(ModelViewSet):
@@ -15,10 +19,14 @@ class AdvertisementViewSet(ModelViewSet):
     filterset_class = AdvertisementFilter
 
     def get_permissions(self):
-        if self.action in ["create", "update", "partial_update"]:
+        if self.action == "create":
             return [IsAuthenticated()]
-        elif self.action in ["destroy", "update", "partial_update"]:
-            return [IsAdminUser]
+        elif self.action == "update":
+            return [IsAdvertisementAuthor()]
+        elif self.action == "partial_update":
+            return [IsAdminUser()]
+        elif self.action == "destroy":
+            return [IsAdminUser() | IsAdvertisementAuthor()]
         return []
 
     @action(detail=True, methods=["POST"])
