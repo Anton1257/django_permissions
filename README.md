@@ -20,7 +20,7 @@
 - Используйте `DateFromToRangeFilter` для фильтрации по дате https://django-filter.readthedocs.io/en/stable/ref/filters.html#datefromtorangefilter.
 
 Пример работы:
-![Фильтрация по дате](./screenshots/date_filter.png)
+![Фильтрация по дате](adv/screenshots/date_filter.png)
 
 - В настройках подключено приложение `rest_framework.authtoken` и сконфигурирован `DEFAULT_AUTHENTICATION_CLASSES`. Для того, чтобы завести токен для пользователя, проделайте следующие шаги:
 
@@ -33,10 +33,10 @@
 Примеры:
 
 Успешный запрос:
-![Успех](./screenshots/success.png)
+![Успех](adv/screenshots/success.png)
 
 Неправильный токен:
-![Неправильный токен](./screenshots/bad_token.png)
+![Неправильный токен](adv/screenshots/bad_token.png)
 
 - Для переопределения доступов для отдельных методов `ViewSet` используется метод `get_permissions`. Он добавлен в заготовку, следует с ним ознакомиться и посмотреть с помощью breakpoint'ов в какой момент DRF его вызывает.
 
@@ -46,8 +46,6 @@
   - либо определяя дополнительный класс-наследник `BasePermission`, дополнительно добавляя его в список `get_permissions` https://www.django-rest-framework.org/api-guide/permissions/#examples — это правильнее, и этот класс можно переиспользовать для других методов.
 
     Любой вариант допустим в рамках этого задания.
-
-- С примерами запросов к API вы можете ознакомиться в [файле requests-examples.http](./requests-examples.http).
 
 # Важно
 
